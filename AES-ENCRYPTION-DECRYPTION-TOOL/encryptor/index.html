@@ -1,0 +1,255 @@
+<!-- MIT License
+
+Copyright (c) 2025 Glueeed
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. -->
+
+<!-- A web application for encrypting and decrypting text using AES with RSA-secured . -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta tags and page settings -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Linking the stylesheet -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- Including Forge library for cryptographic functions -->
+    <script src="https://cdn.jsdelivr.net/npm/node-forge@1.0.0/dist/forge.min.js"></script>
+    <title>AES Encryption Tool</title>
+  </head>
+
+  <body>
+    
+    <div class="container">
+      <!-- Encryption section -->
+      <div class="first_box">
+        <div id="encryptform">
+          <h3>AES Encryption Tool</h3>
+          <!-- Information about AES -->
+          <div id="info" class="info">
+            <h4>About AES</h4>
+            <p>
+              The Advanced Encryption Standard (AES) is a symmetric encryption algorithm widely used across the globe to secure data. It supports key sizes of 128, 192, and 256 bits, and it operates on blocks of 128 bits. AES is known for its speed and security and is used by governments, financial institutions, and other organizations to protect sensitive information.
+              <br>
+              <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard" target="_blank">Click here to learn more about AES.</a>
+            </p>
+          </div>
+          <div class="formcontrol">
+            <label class="labels" for="InputText">Enter text to encrypt: 
+              <span class="tooltip">?
+                <span class="tooltiptext">Enter the text you want to encrypt here.</span>
+              </span>
+            </label>
+            <textarea class="textareas" id="InputText" placeholder="Enter text"></textarea>
+          </div>
+          <div class="formcontrol">
+            <div>
+              <label class="labels" id="EncryptedTextlbl" for="EncryptedText">Encrypted text: 
+                <span class="tooltip">?
+                  <span class="tooltiptext">This field will display the encrypted text.</span>
+                </span>
+              </label>
+            </div>
+            <textarea class="textareas" id="EncryptedText" placeholder="Encrypted Text"  readonly></textarea>
+          </div>
+          <div class="formcontrol">
+            <label class="labels" for="AESKey">Encryption AES key: 
+              <span class="tooltip">?
+                <span class="tooltiptext">Enter the AES key for encryption. The key size should match the selected key size.</span>
+              </span>
+            </label>
+            <input class="textareas" type="text" id="AESKey" placeholder="Select Key Size.." readonly/>
+          </div>
+          <div id="key_btn">
+            <button class="buttons" onclick="generateKey()" id="generatekey_btn" disabled>Generate Random Key</button>
+          </div>
+          <div id="iv_form" class="formcontrol">
+            <label class="labels" for="IV">Encryption Initialization Vector: 
+              <span class="tooltip">?
+                <span class="tooltiptext">Enter the Initialization Vector (IV) for encryption. It should be 16 characters long.</span>
+              </span>
+            </label>
+            <input class="textareas" type="text" id="IV" placeholder="16 characters long (128-bit)" maxlength="16"/>
+          </div>
+          <div id="iv_btn">
+            <button class="buttons" onclick="generateIV()" id="generateiv_btn">Generate Random IV</button>
+          </div>
+          
+        </div>
+        <!-- Encryption parameters section -->
+        <div id="encrypt_parameters">
+          <div class="formcontrol">
+            <div>
+              <label class="labels" for="KeySize">Key Size: 
+                <span class="tooltip">?
+                  <span class="tooltiptext">Select the size of the AES key.</span>
+                </span>
+              </label>
+              <select onchange="updatePlaceholder()" id="KeySize">
+                <option>Size</option>
+                <option value="128">128</option>
+                <option value="192">192</option>
+                <option value="256">256</option>
+              </select>
+            </div>
+          </div>
+          <div class="formcontrol">
+            <label class="labels">AES Key Type: 
+              <!-- Tooltip for key type selection -->
+              <span class="tooltip">?
+                <span class="tooltiptext">Select the type of AES key. CUSTOM allows you to enter your own key, while PBKDF2 generates a key from a password.</span>
+              </span>
+            </label>
+            <div>
+              <select onchange="hideGenerateBtn()" id="AESKEYTYPE">
+                <option selected>Select KeyType</option>
+                <option value="CUSTOM">CUSTOM</option>
+                <option value="PBKDF2">PBKDF2 (Password) </option>
+              </select>
+            </div>
+          </div>
+          <div class="formcontrol">
+            <label class="labels">AES Mode: 
+              <!-- Tooltip for AES mode selection -->
+              <span class="tooltip">?
+                <span class="tooltiptext">Select the mode of AES operation. CBC (Cipher Block Chaining) or ECB (Electronic Code Book).</span>
+              </span>
+            </label>
+            <div>
+              <select onchange="hideIV()" id="AESMode">
+                <option value="CBC">CBC (Cipher Block Chaining)</option>
+                <option value="ECB">ECB (Electronic Code Book)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form">
+        <button class="buttons" onclick="encrypt()">Encrypt</button>
+      </div>
+      
+      <hr>
+      <!-- Decryption section -->
+      <div class="second_box">
+        <div id="decryptform">
+          <h3>AES Decryption Tool</h3>
+          <div class="formcontrol">
+            <div>
+              <label class="labels" for="decryptInputText">Enter encrypted text: 
+                <span class="tooltip">?
+                  <span class="tooltiptext">Enter the text you want to decrypt here.</span>
+                </span>
+              </label>
+            </div>
+            <textarea class="textareas" id="decryptInputText" placeholder="Enter encrypted text"></textarea>
+          </div>
+          <div class="formcontrol">
+            <div>
+              <label class="labels" for="decryptedText">Decrypted text: 
+                <span class="tooltip">?
+                  <span class="tooltiptext">This field will display the decrypted text.</span>
+                </span>
+              </label>
+            </div>
+            <textarea class="textareas" id="decryptedText" placeholder="Decrypted text" readonly></textarea>
+          </div>
+          <div class="formcontrol">
+            <div>
+              <label class="labels" for="decAESKey"> Decryption AES key: 
+                <span class="tooltip">?
+                  <span class="tooltiptext">Enter the AES key for decryption. The key size should match the selected key size.</span>
+                </span>
+              </label>
+            </div>
+            <input class="textareas" type="text" id="decAESKey" placeholder="Select Key Size.." readonly/>
+          </div>
+          <div id="deciv_form" class="formcontrol">
+            <div>
+              <label class="labels" for="decIV">Decryption Initialization Vector: 
+                <span class="tooltip">?
+                  <span class="tooltiptext">Enter the Initialization Vector (IV) for decryption. It should be 16 characters long.</span>
+                </span>
+              </label>
+            </div>
+            <input class="textareas" type="text" id="decIV" placeholder="16 characters long (128-bit)" maxlength="16"/>
+          </div>
+          </div>
+          <!-- Decryption parameters section -->
+          <div id="decrypt_parameters">
+            <div class="formcontrol">
+              <div>
+                <label class="labels" for="DECKeySize">Key Size: 
+                  <span class="tooltip">?
+                    <span class="tooltiptext">Select the size of the AES key.</span>
+                  </span>
+                </label>
+                <select onchange="UpdatePlaceholder()" id="DECKeySize">
+                  <option>Size</option>
+                  <option value="128">128</option>
+                  <option value="192">192</option>
+                  <option value="256">256</option>
+                </select>
+              </div>
+            </div>
+            <div class="formcontrol">
+              <label class="labels">AES Key Type: 
+                <span class="tooltip">?
+                  <span class="tooltiptext">Select the type of AES key. CUSTOM allows you to enter your own key, while PBKDF2 generates a key from a password.</span>
+                </span>
+              </label>
+              <div>
+                <select onchange="changePlaceholderKeyToPassword()" id="DECAESKEYTYPE">
+                  <option selected>Select KeyType</option>
+                  <option value="DECCUSTOM">CUSTOM</option>
+                  <option value="DECPBKDF2">PBKDF2 (Password) </option>
+                </select>
+              </div>
+            </div>
+            <div class="formcontrol">
+              <label class="labels">AES Mode: 
+                <span class="tooltip">?
+                  <span class="tooltiptext">Select the mode of AES operation. CBC (Cipher Block Chaining) or ECB (Electronic Code Book).</span>
+                </span>
+              </label>
+              <div>
+                <select onchange="dec_hideIV()" id="DECAESMode">
+                  <option value="CBC">CBC (Cipher Block Chaining)</option>
+                  <option value="ECB">ECB (Electronic Code Book)</option>
+                </select>
+              </div>
+            </div>
+            <button class="buttons" onclick="decrypt()">Decrypt</button>
+          </div>
+      </div>
+  </div>
+
+    <!-- Encryption and Decryption logic -->
+    <script src="../encryptor/js/encrypt.js"></script>
+    <script src="../encryptor/js/decrypt.js"></script>
+    <script src="../encryptor/js/index.js"></script>
+  </body>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2024 Glueeed. All rights reserved.</p>
+    </div>
+  </footer>
+</html>

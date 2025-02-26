@@ -1,0 +1,26 @@
+{
+  "name": "aes-encryption-decryption-tool",
+  "version": "1.0.0",
+  "description": "AES Encryptor is a tool I built to encrypt and decrypt text with the AES algorithm. It uses RSA to securely send encryption keys and initialization vectors (IVs) to the server, ensuring data privacy. This was one of my first big projects, created to learn web development, cryptography, and API integration as part of my self-taught journey outside school.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Glueeeeed/AES-ENCRYPTION-DECRYPTION-TOOL.git"
+  },
+  "author": "Glueeed",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Glueeeeed/AES-ENCRYPTION-DECRYPTION-TOOL/issues"
+  },
+  "homepage": "https://github.com/Glueeeeed/AES-ENCRYPTION-DECRYPTION-TOOL#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "node-forge": "^1.3.1"
+  }
+}

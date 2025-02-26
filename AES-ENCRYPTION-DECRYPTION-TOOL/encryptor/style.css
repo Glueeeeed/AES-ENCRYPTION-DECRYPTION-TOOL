@@ -1,0 +1,303 @@
+/* MIT License
+
+Copyright (c) 2025 Glueeed
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. */
+
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+  }
+  
+  .container {
+    width: 90%; 
+    max-width: 900px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+  
+  }
+  
+  
+  
+  h3 {
+    font-size: 24px;
+    color: #594dcc;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .formcontrol {
+    margin-bottom: 2%;
+  }
+  
+  .labels {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .textareas,
+  input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  select {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .textareas:focus,
+  input:focus {
+    border-color: #594dcc;
+    background-color: #ffffff;
+  }
+  
+  select:focus {
+    border-color: #594dcc;
+    background-color: #ffffff;
+  }
+  
+  .textareas[readonly] {
+    background-color: #e9ecef; 
+    cursor: not-allowed; 
+  }
+  
+  
+  .buttons {
+    display: inline-block;
+    background-color: #3D348B;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #292468;
+  }
+  
+  #generatekey_btn:hover {
+    background-color: #594dcc;
+  }
+  
+  #generateiv_btn:hover {
+    background-color: #594dcc;
+  }
+  
+  #generatekey_btn {
+   margin-bottom: 25px;
+   display: inline-block;
+   background-color: #6c60d8;
+   color: #ffffff;
+   border: none;
+   border-radius: 5px;
+   margin-bottom: 10px;
+   padding: 10px 15px;
+   font-size: 14px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+  }
+  #generateiv_btn {
+    margin-bottom: 25px;
+    margin-bottom: 25px;
+    display: inline-block;
+    background-color: #6c60d8;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+   }
+  .footer {
+    background-color: #3D348B;
+    color: #ecf0f1;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto; 
+  }
+  
+  .footer-content p {
+    margin: 0;
+  }
+  
+  /* Media Queries */
+  
+  
+  @media (max-width: 768px) {
+    .container {
+      width: 95%; 
+      padding: 15px; 
+    }
+  
+    h3 {
+      font-size: 20px;
+    }
+  
+    button {
+      font-size: 13px;
+      padding: 8px 12px;
+    }
+  }
+  
+  
+  @media (max-width: 480px) {
+    .container {
+      width: 100%; 
+      padding: 10px; 
+    }
+  
+    h3 {
+      font-size: 18px; 
+    }
+  
+    button {
+      font-size: 12px;
+      padding: 6px 10px;
+    }
+  
+    input {
+      font-size: 12px; 
+      padding: 8px;
+    }
+  
+    .footer {
+      font-size: 14px; 
+      padding: 15px 5px;
+    }
+  }
+  
+
+.info {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.info h4 {
+  margin-top: 0;
+  color: #333;
+}
+
+.info p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.info ul {
+  padding-left: 20px;
+}
+
+.info ul li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+}
+
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 5px;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #fff;
+  line-height: 18px;
+}
+
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 220px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; 
+  left: 50%;
+  margin-left: -110px; 
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%; 
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
