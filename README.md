@@ -41,7 +41,7 @@ AES Encryptor is my first big project—a tool that lets you encrypt and decrypt
 ## ● Tech Stack
 - **Backend**: `Node.js, Express, CryptoJS`
 - **Frontend**: `HTML, JavaScript , Forge (RSA)`
-- **Seciurity**: `HTTTPS with Let's Encrypt certificates`
+- **Security**: `HTTTPS with Let's Encrypt certificates`
 
 ## ● Status
 This is a fully working project—both encryption (`/api/encrypt`) and decryption (`/api/decrypt`) are ready to go. It’s my early take on crypto tools, later rewritten with `ECDH` and `Argon2` (**SOON**).
