@@ -18,9 +18,10 @@ AES Encryptor is my first big project—a tool that lets you encrypt and decrypt
 
 ## ● How to Run It
 1. **What You Need**:
+   - VPS server (You can also host it locally.)
    - Node.js (v16+ recommended)
    - A web browser
-2. **Setup**:
+3. **Setup**:
    ```bash
    # Clone this repository
    git clone https://github.com/Glueeeeed/AES-ENCRYPTION-DECRYPTION-TOOL.git
@@ -29,11 +30,11 @@ AES Encryptor is my first big project—a tool that lets you encrypt and decrypt
    # Install dependencies
    npm install
 
-3. **Start the server**
+4. **Start the server**
    ```bash
     npm start
  
-4. ***IMPORTANT***
+5. ***IMPORTANT***
 
     *If you want to use the code, replace the placeholders with your own data. Look for comments like "Enter your private key here" or "Enter your certificate path" in server.js, encrypt.js, and decrypt.js.*
 
